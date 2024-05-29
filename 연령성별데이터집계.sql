@@ -23,7 +23,7 @@ WITH
 			     ,	dob
 			     ,	city_code
 			     ,	age
-			     ,	(age / 5) * 5 	AS age_group
+			     ,	FLOOR(age / 5) * 5 	AS age_group
 		    	FROM	age_calculated
 			)
 			-- 성별/연령 구간별 고객 수 집계
