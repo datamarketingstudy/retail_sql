@@ -15,13 +15,13 @@ WITH purchase_dates AS (
     FROM 
         transactions
     WHERE
-        tran_date <= DATE '2019-02-28'
+        tran_date <= DATE '2013-02-28'
     GROUP BY 
         customer_id
 )
 SELECT 
     p.customer_id,
-    (DATE '2019-02-28' - p.last_purchase_date) AS days_since_last_purchase,
+    (DATE '2013-02-28' - p.last_purchase_date) AS days_since_last_purchase,
     CASE
         WHEN p.total_purchases > 1 THEN
             (p.last_purchase_date - p.first_purchase_date) / (p.total_purchases - 1)
