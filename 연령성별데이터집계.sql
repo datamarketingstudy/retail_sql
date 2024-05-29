@@ -5,37 +5,34 @@
 
 WITH 
 	age_calculated AS (
-    	SELECT	customer_id
-    		,	gender
-    		,	dob
-    		,	city_code
-    		,	DATE_PART('year', AGE('2011-01-01', dob)) AS age
-    	FROM 
-        		customer
-    	WHERE 	gender IS NOT NULL 
-        AND 	dob IS NOT NULL
-	)
-		SELECT	*
-		FROM	age_calculated
-		
-	,
+			SELECT	customer_id
+			     ,	gender
+			     ,	dob
+			     ,	city_code
+			     ,	DATE_PART('year', AGE('2011-01-01', dob)) AS age
+		    	FROM 	customer
+		    	WHERE 	gender IS NOT NULL 
+		        AND 	dob IS NOT NULL
+			)
+			,
 	age_grouped AS (
-    	SELECT 	customer_id
-    		,	gender
-    		,	dob
-    		,	city_code
-    		,	age
-    		,	(age / 5) * 5 	AS age_group
-    	FROM	age_calculated
-	)
-		SELECT	gender
-			,	age_group
-			,	COUNT(*) 		AS customer_count
-		FROM 	age_grouped
-		GROUP BY 
-    			gender
-    		,	age_group
-		ORDER BY 
+		    	SELECT 	customer_id
+			     ,	gender
+			     ,	dob
+			     ,	city_code
+			     ,	age
+			     ,	(age / 5) * 5 	AS age_group
+		    	FROM	age_calculated
+			)
+			-- 성별/연령 구간별 고객 수 집계
+			SELECT	gender
+			     ,	age_group
+			     ,	COUNT(*) 		AS customer_count
+			FROM 	age_grouped
+			GROUP BY 
+    				gender
+    			     ,	age_group
+			ORDER BY 
 				gender
-			,	age_group
-		;
+			     ,	age_group
+			;
