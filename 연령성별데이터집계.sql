@@ -3,6 +3,8 @@
  * (단, 고객의 성별, 연령 정보를 구할 수 없을 경우 해당 데이터는 집계에서 제외해 주세요.)
  */
 
+/* postgre SQL 문법으로 작성 */
+
 WITH 
 	age_calculated AS (
 			SELECT	customer_id
